@@ -6,12 +6,12 @@ import sys
 import spotFuncs
 import concurrent.futures
 import csver
-
 # Usage: python spotifylinkstomp3player.py link1 link2 link3 ...
 # This script will download the songs from the links and move them to the mp3 player location
 
 mp3_player_location = "D:\\albums"  # Location of the mp3 player
 download_location = "E:\\music\\unsorted"  # Location to download the songs
+num_max_workers = 2 # Number of threads to use for downloading
 
 def sanitize(filename):
     # Remove illegal characters from filename (Windows)
@@ -58,7 +58,7 @@ def download(link):
     subprocess.run(["spotdl", link, "--output", download_location])  # Download songs using spotdl
     return os.listdir(download_location)
 
-with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+with concurrent.futures.ThreadPoolExecutor(max_workers=num_max_workers) as executor:
     future_to_link = {executor.submit(download, link): link for link in links}
     for future in concurrent.futures.as_completed(future_to_link):
         results.extend(future.result())
