@@ -24,12 +24,14 @@ It is also possible run the script without command line arguments, and the scrip
 
 The script will download the songs from the links and move them to the location specified in the mp3_player_location variable.
 
+The number of max workers can be adjusted to allow for parallell downloads, speeding up the download and conversion process. Set to 1 to make it easy on the CPU, but a relatively slow process. Set it to 4 
+
 ## Configuration
 You can configure the download and destination locations by modifying the following variables in the sp2mp3.py script:
 
 mp3_player_location: The location of the mp3 player. The downloaded albums will be moved to this location.
 download_location: The location to download the songs.
-
+num_max_workers: Number of cores to use while downloading
 ## Dependencies
 This script requires the following Python libraries:
 
