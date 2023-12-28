@@ -19,6 +19,8 @@ Run the main script with the Spotify album links as command line arguments:
 ```bash
 python sp2mp3.py link1 link2 link3 ...
 ```
+It is also possible run the script without command line arguments, and the script will select 3 random saved albums from the user's spotify account. 
+(Be aware this will ask for you to authenticate your spotify account in a browser)
 
 The script will download the songs from the links and move them to the location specified in the mp3_player_location variable.
 
