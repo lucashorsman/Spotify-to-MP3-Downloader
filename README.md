@@ -22,7 +22,7 @@ python sp2mp3.py link1 link2 link3 ...
 
 The script will download the songs from the links and move them to the location specified in the mp3_player_location variable.
 
-#Configuration
+## Configuration
 You can configure the download and destination locations by modifying the following variables in the sp2mp3.py script:
 
 mp3_player_location: The location of the mp3 player. The downloaded albums will be moved to this location.
@@ -38,10 +38,8 @@ concurrent.futures: for parallel processing
 
 csver: custom module for handling CSV files
 
-Contributing
+## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 License
 MIT
-
-```
