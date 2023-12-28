@@ -24,7 +24,9 @@ It is also possible run the script without command line arguments, and the scrip
 
 The script will download the songs from the links and move them to the location specified in the mp3_player_location variable.
 
-The number of max workers can be adjusted to allow for parallell downloads, speeding up the download and conversion process. Set to 1 to make it easy on the CPU, but a relatively slow process. Set it to 4 
+You can adjust the number of maximum workers to control the degree of parallelism during the download process. This parameter determines how many downloads can occur simultaneously, which can significantly speed up the overall process.
+
+However, be aware that increasing the number of maximum workers will also increase CPU usage. A setting of 1 will minimize CPU usage but result in slower downloads, as albums will be downloaded one at a time. A higher setting, such as 4, will allow for faster downloads by using more CPU cores, but will also consume more CPU resources. Adjust this setting according to your system's capabilities and your performance needs.
 
 ## Configuration
 You can configure the download and destination locations by modifying the following variables in the sp2mp3.py script:
