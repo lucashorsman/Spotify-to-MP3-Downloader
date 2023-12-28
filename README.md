@@ -27,7 +27,8 @@ You can configure the download and destination locations by modifying the follow
 
 mp3_player_location: The location of the mp3 player. The downloaded albums will be moved to this location.
 download_location: The location to download the songs.
-#Dependencies
+
+## Dependencies
 This script requires the following Python libraries:
 
 os, shutil, subprocess, sys: for file operations and running commands
