@@ -11,7 +11,7 @@ import csver
 
 mp3_player_location = "D:\\albums"  # Location of the mp3 player
 download_location = "E:\\music\\unsorted"  # Location to download the songs
-num_max_workers = 2 # Number of threads to use for downloading
+num_max_workers = 1 # Number of threads to use for downloading
 
 def sanitize(filename):
     # Remove illegal characters from filename (Windows)
