@@ -31,10 +31,13 @@ download_location: The location to download the songs.
 This script requires the following Python libraries:
 
 os, shutil, subprocess, sys: for file operations and running commands
+
 mutagen.easyid3: for handling ID3 tags in MP3 files
+
 concurrent.futures: for parallel processing
-spotFuncs: custom module for interacting with Spotify
+
 csver: custom module for handling CSV files
+
 Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
