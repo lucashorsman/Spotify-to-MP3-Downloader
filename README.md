@@ -1,6 +1,10 @@
 # Spotify-to-MP3-Downloader
 
-This Python script downloads albums from Spotify and moves them to a specified location. It also keeps track of already downloaded albums to avoid duplicates.
+This Python script downloads albums from Spotify and moves them to a specified location. It also keeps track of already downloaded albums to avoid duplicates. 
+
+## Proof of Concept
+
+This project is a proof of concept and is not intended for production use. Please use this responsibly and ensure you have the necessary rights to download and use the music.
 
 ## Files
 
@@ -43,7 +47,7 @@ mutagen.easyid3: for handling ID3 tags in MP3 files
 
 concurrent.futures: for parallel processing
 
-csver: custom module for handling CSV files
+csv: module for handling CSV files
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

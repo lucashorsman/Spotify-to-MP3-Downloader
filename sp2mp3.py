@@ -5,13 +5,13 @@ from mutagen.easyid3 import EasyID3
 import sys
 import spotFuncs
 import concurrent.futures
-import csver
-# Usage: python spotifylinkstomp3player.py link1 link2 link3 ...
+import csv
+# Usage: python sp2mp3.py album/artist/playlist then enter the links
 # This script will download the songs from the links and move them to the mp3 player location
 
-mp3_player_location = "D:\\albums"  # Location of the mp3 player
 download_location = "E:\\music\\unsorted"  # Location to download the songs
-num_max_workers = 1 # Number of threads to use for downloading
+mp3_player_location = "D:\\albums"  # Location of the mp3 player
+num_max_workers = 3 # Number of threads to use for downloading
 
 def sanitize(filename):
     # Remove illegal characters from filename (Windows)
@@ -29,10 +29,21 @@ with open('downloaded_albums.csv', 'r') as f:
             downloaded_albums.add(row[0])
 
 # 1. Pick album from Spotify
-if len(sys.argv) > 1:
-    links = sys.argv[1:]  # Get album links from command line arguments
-else:
-    links = spotFuncs.get_rand_albums()  # Get random album links using spotFuncs
+albumMode = False
+artistMode = False 
+playlistMode = False
+if sys.argv[1] == "album":
+    albumMode = True
+    links = input("Enter album links (separated by spaces): ").split()
+if sys.argv[1] == "artist":
+    artist = input("Enter artist name: ")
+    artistMode = True
+    top3 = input("Get only top 3 albums? (y/n): ").lower().strip() == "y"
+    links = spotFuncs.get_artist_albums(artist,top3) # Get artist album
+if sys.argv[1] == "playlist":
+    playlist = input("Enter playlist link: ")
+    links = spotFuncs.get_playlist_songs(playlist) # Get song links
+    playlistMode = True
 
 if len(links) == 1:
     link = links[0]
@@ -40,22 +51,27 @@ if len(links) == 1:
         print("Album already downloaded. Exiting script.")
         sys.exit()
 
-print("Selected album links:")
-for link in links:
-    spotFuncs.printAlbumfromLink(link)  # Print album details from the link
 
+if albumMode or artistMode:
+    print("Selected album links:")
+    for link in links:
+        spotFuncs.printAlbumfromLink(link)  # Print album details from the link
+if playlistMode:
+    print("Selected song links:")
+    for link in links:
+        spotFuncs.printSongfromLink(link)  # Print song details from the link
 # Remove already downloaded albums from the list
 links = [link for link in links if link not in downloaded_albums]
 if not links:
     print("All albums are already downloaded. Exiting script.")
     sys.exit()
 
-print("Downloading songs from Spotify...")
+print("Downloading songs from youtube...")
 
 # 2. Tell spotdl to download files
 results = []
-def download(link):
-    subprocess.run(["spotdl", link, "--output", download_location])  # Download songs using spotdl
+def download(url):
+    subprocess.run(["spotdl", url, "--output", download_location])  # Download songs using spotdl
     return os.listdir(download_location)
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=num_max_workers) as executor:
@@ -63,11 +79,6 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=num_max_workers) as execu
     for future in concurrent.futures.as_completed(future_to_link):
         results.extend(future.result())
 
-# Add the downloaded albums to the list and save it back to the CSV file
-with open('downloaded_albums.csv', 'a') as f:
-    writer = csv.writer(f)
-    for link in links:
-        writer.writerow([link])
 
 print("Renaming and moving mp3 files...")
 
@@ -101,5 +112,11 @@ for track in results:
         destination_file = f"{album_directory}/{os.path.basename(new_filename)}"
         if not os.path.exists(destination_file):
             shutil.move(new_filename, destination_file)
+# Add the downloaded albums to the list and save it back to the CSV file
+with open('downloaded_albums.csv', 'a') as f:
+    writer = csv.writer(f)
+    for link in links:
+        writer.writerow([link])
+
 
 print("Songs downloaded and moved successfully!")
