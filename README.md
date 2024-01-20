@@ -5,6 +5,7 @@ This Python script downloads albums from Spotify and moves them to a specified l
 ## Proof of Concept
 
 This project is a proof of concept and is not intended for production use. Please use this responsibly and ensure you have the necessary rights to download and use the music.
+Users are responsible for their actions and potential legal consequences. I do not support unauthorized downloading of copyrighted material and take no responsibility for user actions.
 
 ## Files
 
