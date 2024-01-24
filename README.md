@@ -21,9 +21,11 @@ Users are responsible for their actions and potential legal consequences. I do n
 
 Run the main script with either artist, album or playlist to enter respective modes. Then, enter the link to the item you desire.
 
+Example:
 ```bash
-python sp2mp3.py link1 link2 link3 ...
+python sp2mp3.py artist
 ```
+
 It is also possible run the script without command line arguments, and the script will select 3 random saved albums from the user's spotify account. 
 (Be aware this will ask for you to authenticate your spotify account in a browser)
 
