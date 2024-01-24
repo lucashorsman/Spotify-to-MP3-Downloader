@@ -19,7 +19,7 @@ Users are responsible for their actions and potential legal consequences. I do n
 
 ## Usage
 
-Run the main script with the Spotify album links as command line arguments:
+Run the main script with either artist, album or playlist to enter respective modes. Then, enter the link to the item you desire.
 
 ```bash
 python sp2mp3.py link1 link2 link3 ...
